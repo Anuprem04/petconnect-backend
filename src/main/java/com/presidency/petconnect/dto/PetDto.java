@@ -1,27 +1,19 @@
-package com.presidency.petconnect.entity;
+package com.presidency.petconnect.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
+import com.presidency.petconnect.entity.Shelter;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
-import java.time.Instant;
 
-@Entity
-public class Pet {
-    @Id
-    @SequenceGenerator(name = "pet_seq", sequenceName = "pet_sequence", initialValue = 3000, allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pet_seq")
+public class PetDto {
+
     private int petId;
-
-    @ManyToOne
-    @JoinColumn(name = "shelter_id")
-    @JsonBackReference
     private Shelter shelter;
-
     private String name;
     private String breed;
     private int age;
@@ -32,10 +24,10 @@ public class Pet {
     private Double price;
     private Timestamp createdAt;
 
-    public Pet() {
+    public PetDto() {
     }
 
-    public Pet(int petId, Shelter shelter, String name, String breed, int age, String gender, String description, String photos, String adoptionStatus, Double price) {
+    public PetDto(int petId, Shelter shelter, String name, String breed, int age, String gender, String description, String photos, String adoptionStatus, Double price, Timestamp createdAt) {
         this.petId = petId;
         this.shelter = shelter;
         this.name = name;
@@ -46,6 +38,7 @@ public class Pet {
         this.photos = photos;
         this.adoptionStatus = adoptionStatus;
         this.price = price;
+        this.createdAt = createdAt;
     }
 
     public int getPetId() {
@@ -132,9 +125,7 @@ public class Pet {
         return createdAt;
     }
 
-    @PrePersist
-    protected void onCreate() {
-        createdAt = Timestamp.from(Instant.now());
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
-
 }

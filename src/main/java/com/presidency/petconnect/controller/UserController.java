@@ -1,52 +1,47 @@
+
 package com.presidency.petconnect.controller;
 
-import com.presidency.petconnect.entity.User;
+import com.presidency.petconnect.dto.UserDto;
+import com.presidency.petconnect.exception.ResourceNotFoundException;
 import com.presidency.petconnect.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
 
-    private final UserService userService;
+    private final UserService service;
 
-    public UserController(UserService userService){
-        this.userService = userService;
-    }
-    @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
-        // Fetch all users logic
-        return ResponseEntity.ok(new ArrayList<>());
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable int id) {
-        // Fetch user by ID logic
-        return ResponseEntity.ok(new User());
+    public UserController(UserService service) {
+        this.service = service;
     }
 
     @PostMapping
-    public ResponseEntity<String> createUser(@RequestBody User user) {
-        String response = userService.createUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    public ResponseEntity<UserDto> create(@RequestBody UserDto dto) {
+        return new ResponseEntity<>(service.createUser(dto), HttpStatus.CREATED);
     }
 
-
-    @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user) {
-        // Update user logic
-        return ResponseEntity.ok(user);
+    @GetMapping("{id}")
+    public ResponseEntity<UserDto> getById(@PathVariable int id) throws ResourceNotFoundException {
+        return ResponseEntity.ok(service.getUserById(id));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable int id) {
-        // Delete user logic
-        return ResponseEntity.noContent().build();
+    @GetMapping
+    public ResponseEntity<List<UserDto>> getAll() {
+        return ResponseEntity.ok(service.getAllUsers());
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<UserDto> update(@PathVariable int id, @RequestBody UserDto dto) throws ResourceNotFoundException {
+        return ResponseEntity.ok(service.updateUser(id, dto));
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> delete(@PathVariable int id) throws ResourceNotFoundException {
+        service.deleteUser(id);
+        return ResponseEntity.ok("User deleted");
     }
 }

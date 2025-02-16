@@ -1,22 +1,10 @@
-package com.presidency.petconnect.entity;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+package com.presidency.petconnect.dto;
 
 import java.sql.Timestamp;
-import java.time.Instant;
 
-@Entity
-
-public class User {
-    @Id
-    @SequenceGenerator(name = "user_seq", sequenceName = "user_sequence", initialValue = 1000, allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
+public class UserDto {
     private int userId;
-
     private String name;
     private String email;
     private String password;
@@ -25,10 +13,9 @@ public class User {
     private String address;
     private Timestamp createdAt;
 
-    public User() {
-    }
+    public UserDto() {}
 
-    public User(int userId, String name, String email, String password, String petPreferences, long phone, String address) {
+    public UserDto(int userId, String name, String email, String password, String petPreferences, long phone, String address, Timestamp createdAt) {
         this.userId = userId;
         this.name = name;
         this.email = email;
@@ -36,6 +23,7 @@ public class User {
         this.petPreferences = petPreferences;
         this.phone = phone;
         this.address = address;
+        this.createdAt = createdAt;
     }
 
     public int getUserId() {
@@ -100,10 +88,5 @@ public class User {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
-    }
-
-    @PrePersist
-    protected void onCreate() {
-        createdAt = Timestamp.from(Instant.now());
     }
 }

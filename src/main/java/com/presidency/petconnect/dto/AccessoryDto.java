@@ -1,20 +1,7 @@
-package com.presidency.petconnect.entity;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+package com.presidency.petconnect.dto;
 
-import java.sql.Timestamp;
-import java.time.Instant;
-
-@Entity
-public class Accessory {
-
-    @Id
-    @SequenceGenerator(name = "accessory_seq", sequenceName = "accessory_sequence", initialValue = 4000, allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "accessory_seq")
+public class AccessoryDto {
     private int accessoryId;
     private String name;
     private String category;
@@ -22,10 +9,10 @@ public class Accessory {
     private double price;
     private String image;
 
-    public Accessory() {
+    public AccessoryDto() {
     }
 
-    public Accessory(int accessoryId, String name, String category, String description, double price, String image) {
+    public AccessoryDto(int accessoryId, String name, String category, String description, double price, String image) {
         this.accessoryId = accessoryId;
         this.name = name;
         this.category = category;
