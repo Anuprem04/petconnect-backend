@@ -1,34 +1,17 @@
-package com.presidency.petconnect.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+package com.presidency.petconnect.dto;
 
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-
-@Entity
-public class Shelter {
-    @Id
-    @SequenceGenerator(name = "shelter_seq", sequenceName = "shelter_sequence", initialValue = 2000, allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shelter_seq")
+public class ShelterDto {
     private int shelterId;
     private String name;
     private String address;
     private String phone;
     private String contactPerson;
-    @OneToMany(mappedBy = "shelter", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
-    private List<Pet> pets = new ArrayList<>();
-    public Shelter() {
-    }
 
-    public Shelter(int shelterId, String name, String address, String phone, String contactPerson) {
+
+    public ShelterDto() {}
+
+    public ShelterDto(int shelterId, String name, String address, String phone, String contactPerson) {
         this.shelterId = shelterId;
         this.name = name;
         this.address = address;
@@ -74,13 +57,5 @@ public class Shelter {
 
     public void setContactPerson(String contactPerson) {
         this.contactPerson = contactPerson;
-    }
-
-    public List<Pet> getPets() {
-        return pets;
-    }
-
-    public void setPets(List<Pet> pets) {
-        this.pets = pets;
     }
 }

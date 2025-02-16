@@ -1,8 +1,13 @@
 package com.presidency.petconnect.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 
 @Entity
 public class Adoption {
@@ -20,7 +25,17 @@ public class Adoption {
 
     private Timestamp applicationDate;
     private String approvalStatus;
-    private Timestamp createdAt;
+
+    public Adoption() {
+    }
+
+    public Adoption(int adoptionId, Pet pet, User user, Timestamp applicationDate, String approvalStatus) {
+        this.adoptionId = adoptionId;
+        this.pet = pet;
+        this.user = user;
+        this.applicationDate = applicationDate;
+        this.approvalStatus = approvalStatus;
+    }
 
     public int getAdoptionId() {
         return adoptionId;
@@ -62,11 +77,4 @@ public class Adoption {
         this.approvalStatus = approvalStatus;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
 }
