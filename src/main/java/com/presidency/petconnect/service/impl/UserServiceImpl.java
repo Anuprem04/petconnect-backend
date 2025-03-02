@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(userDto.getPassword());
         user.setPetPreferences(userDto.getPetPreferences());
         user.setPhone(userDto.getPhone());
-        user.setAddress(userDto.getAddress());
+        user.setAddress(userDto.getCity());
         User updated = userRepository.save(user);
         return UserMapper.toDto(updated);
     }

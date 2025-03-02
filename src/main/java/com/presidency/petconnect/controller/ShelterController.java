@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/shelters")
+@RequestMapping("/api/petConnect/shelters")
 public class ShelterController {
 
     private final ShelterService shelterService;

@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/pets")
+@RequestMapping("/api/petConnect/pets")
 public class PetController {
     private static final Logger PETCONTROLLERLOG = LoggerFactory.getLogger(PetController.class);
 
