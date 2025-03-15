@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/accessories")
+@RequestMapping("/api/petConnect/accessories")
 public class AccessoryController {
 
     private final AccessoryService service;

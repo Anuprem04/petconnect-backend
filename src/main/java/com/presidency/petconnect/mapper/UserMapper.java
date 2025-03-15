@@ -26,7 +26,7 @@ public class UserMapper {
                 dto.getPassword(),
                 dto.getPetPreferences(),
                 dto.getPhone(),
-                dto.getAddress()
+                dto.getCity()
         );
     }
 }

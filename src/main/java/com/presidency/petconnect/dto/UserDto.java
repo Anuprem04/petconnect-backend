@@ -10,19 +10,19 @@ public class UserDto {
     private String password;
     private String petPreferences;
     private long phone;
-    private String address;
+    private String city;
     private Timestamp createdAt;
 
     public UserDto() {}
 
-    public UserDto(int userId, String name, String email, String password, String petPreferences, long phone, String address, Timestamp createdAt) {
+    public UserDto(int userId, String name, String email, String password, String petPreferences, long phone, String city, Timestamp createdAt) {
         this.userId = userId;
         this.name = name;
         this.email = email;
         this.password = password;
         this.petPreferences = petPreferences;
         this.phone = phone;
-        this.address = address;
+        this.city = city;
         this.createdAt = createdAt;
     }
 
@@ -74,12 +74,12 @@ public class UserDto {
         this.phone = phone;
     }
 
-    public String getAddress() {
-        return address;
+    public String getCity() {
+        return city;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public Timestamp getCreatedAt() {
