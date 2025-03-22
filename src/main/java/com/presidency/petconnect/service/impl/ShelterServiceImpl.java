@@ -45,9 +45,9 @@ public class ShelterServiceImpl implements ShelterService {
         Shelter shelter = shelterRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Shelter not found"));
         shelter.setName(shelterDto.getName());
-        shelter.setAddress(shelterDto.getAddress());
+        shelter.setCity(shelterDto.getCity());
         shelter.setPhone(shelterDto.getPhone());
-        shelter.setContactPerson(shelterDto.getContactPerson());
+        shelter.setPassword(shelterDto.getPassword());
         Shelter updatedShelter = shelterRepository.save(shelter);
         return ShelterMapper.mapToShelterDto(updatedShelter);
     }

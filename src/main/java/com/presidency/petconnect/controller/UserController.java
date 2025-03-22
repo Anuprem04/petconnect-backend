@@ -1,8 +1,12 @@
 
 package com.presidency.petconnect.controller;
 
+import com.presidency.petconnect.dto.LoginRequestDto;
 import com.presidency.petconnect.dto.UserDto;
+import com.presidency.petconnect.entity.User;
 import com.presidency.petconnect.exception.ResourceNotFoundException;
+import com.presidency.petconnect.mapper.UserMapper;
+import com.presidency.petconnect.service.LoginService;
 import com.presidency.petconnect.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -13,35 +17,35 @@ import java.util.List;
 @RequestMapping("/api/petConnect/users")
 public class UserController {
 
-    private final UserService service;
+    private final UserService userService;
 
-    public UserController(UserService service) {
-        this.service = service;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @PostMapping
     public ResponseEntity<UserDto> create(@RequestBody UserDto dto) {
-        return new ResponseEntity<>(service.createUser(dto), HttpStatus.CREATED);
+        return new ResponseEntity<>(userService.createUser(dto), HttpStatus.CREATED);
     }
 
     @GetMapping("{id}")
     public ResponseEntity<UserDto> getById(@PathVariable int id) throws ResourceNotFoundException {
-        return ResponseEntity.ok(service.getUserById(id));
+        return ResponseEntity.ok(userService.getUserById(id));
     }
 
     @GetMapping
     public ResponseEntity<List<UserDto>> getAll() {
-        return ResponseEntity.ok(service.getAllUsers());
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @PutMapping("{id}")
     public ResponseEntity<UserDto> update(@PathVariable int id, @RequestBody UserDto dto) throws ResourceNotFoundException {
-        return ResponseEntity.ok(service.updateUser(id, dto));
+        return ResponseEntity.ok(userService.updateUser(id, dto));
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<String> delete(@PathVariable int id) throws ResourceNotFoundException {
-        service.deleteUser(id);
+        userService.deleteUser(id);
         return ResponseEntity.ok("User deleted");
     }
 }
