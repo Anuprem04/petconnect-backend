@@ -102,6 +102,7 @@ public class SecurityConfig {
                     .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                     .authorizeHttpRequests(auth -> auth
                             .requestMatchers(HttpMethod.OPTIONS, "/api/petConnect/**").permitAll()
+                            .requestMatchers(HttpMethod.POST, "/api/petConnect/shelters").permitAll()
                             .requestMatchers(HttpMethod.POST, "/api/petConnect/login/**").permitAll()
                             .requestMatchers(HttpMethod.POST, "/api/petConnect/users/**").permitAll()
                             .requestMatchers(HttpMethod.GET, "/api/petConnect/pets/**").permitAll()
