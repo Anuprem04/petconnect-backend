@@ -57,7 +57,7 @@ public class PetController {
     }
 
     @GetMapping("{id}")
-    @PreAuthorize("hasRole('SHELTER')")
+    @PreAuthorize("hasRole('SHELTER') or hasRole('USER')")
     public ResponseEntity<PetDto> getOne(
             @AuthenticationPrincipal Jwt jwt,
             @PathVariable int id
