@@ -83,4 +83,9 @@ public class PetServiceImpl implements PetService {
         }
         petRepository.deleteById(id);
     }
+
+    @Override
+    public List<PetDto> getAllPets() {
+        return petRepository.findAll().stream().map(PetMapper::mapToPetDto).collect(Collectors.toList());
+    }
 }

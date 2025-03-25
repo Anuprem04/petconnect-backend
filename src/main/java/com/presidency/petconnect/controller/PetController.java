@@ -55,6 +55,11 @@ public class PetController {
         Integer shelterId = jwt.getClaim("id");
         return ResponseEntity.ok(petService.getAllByShelterId(shelterId));
     }
+    @GetMapping("/all")
+
+    public ResponseEntity<List<PetDto>> getAllPets(@AuthenticationPrincipal Jwt jwt) {
+        return ResponseEntity.ok(petService.getAllPets());
+    }
 
     @GetMapping("{id}")
     @PreAuthorize("hasRole('SHELTER') or hasRole('USER')")
