@@ -1,20 +1,22 @@
 package com.presidency.petconnect.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.presidency.petconnect.entity.Shelter;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class PetDto {
 
+
     private int petId;
-    private Shelter shelter;
-    private String name;
+
+
+    private Integer shelterId;
+
+    private String animalType;
     private String breed;
     private int age;
     private String gender;
@@ -22,15 +24,16 @@ public class PetDto {
     private String photos;
     private String adoptionStatus;
     private Double price;
-    private Timestamp createdAt;
+    private List<MultipartFile> photoFiles;
+
 
     public PetDto() {
     }
 
-    public PetDto(int petId, Shelter shelter, String name, String breed, int age, String gender, String description, String photos, String adoptionStatus, Double price, Timestamp createdAt) {
+    public PetDto(int petId, Integer shelterId, String animalType, String breed, int age, String gender, String description, String photos, String adoptionStatus, Double price, List<MultipartFile> photoFiles) {
         this.petId = petId;
-        this.shelter = shelter;
-        this.name = name;
+        this.shelterId = shelterId;
+        this.animalType = animalType;
         this.breed = breed;
         this.age = age;
         this.gender = gender;
@@ -38,7 +41,7 @@ public class PetDto {
         this.photos = photos;
         this.adoptionStatus = adoptionStatus;
         this.price = price;
-        this.createdAt = createdAt;
+        this.photoFiles = photoFiles;
     }
 
     public int getPetId() {
@@ -49,20 +52,20 @@ public class PetDto {
         this.petId = petId;
     }
 
-    public Shelter getShelter() {
-        return shelter;
+    public Integer getShelterId() {
+        return shelterId;
     }
 
-    public void setShelter(Shelter shelter) {
-        this.shelter = shelter;
+    public void setShelterId(Integer shelterId) {
+        this.shelterId = shelterId;
     }
 
-    public String getName() {
-        return name;
+    public String getAnimalType() {
+        return animalType;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAnimalType(String animalType) {
+        this.animalType = animalType;
     }
 
     public String getBreed() {
@@ -121,11 +124,11 @@ public class PetDto {
         this.price = price;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public List<MultipartFile> getPhotoFiles() {
+        return photoFiles;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setPhotoFiles(List<MultipartFile> photoFiles) {
+        this.photoFiles = photoFiles;
     }
 }

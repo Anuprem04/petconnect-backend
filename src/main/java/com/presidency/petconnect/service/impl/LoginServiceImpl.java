@@ -32,7 +32,7 @@ public class LoginServiceImpl implements LoginService {
         if (user == null || !user.getPassword().equals(loginRequest.getPassword())) {
             throw new RuntimeException("Invalid username/password.");
         }
-        String token = jwtUtil.generateToken(user.getEmail(), "USER");
+        String token = jwtUtil.generateToken(user.getEmail(), "USER",user.getUserId());
         return new AuthResponseDto(token, "USER");
     }
 
@@ -42,7 +42,7 @@ public class LoginServiceImpl implements LoginService {
         if (shelter == null || !shelter.getPassword().equals(loginRequest.getPassword())) {
             throw new RuntimeException("Invalid username/password.");
         }
-        String token = jwtUtil.generateToken(shelter.getEmail(), "SHELTER");
+        String token = jwtUtil.generateToken(shelter.getEmail(), "SHELTER", shelter.getShelterId());
         return new AuthResponseDto(token, "SHELTER");
     }
 }

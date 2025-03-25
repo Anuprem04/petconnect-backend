@@ -3,9 +3,11 @@ package com.presidency.petconnect.security;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
+import java.util.Base64;
 import java.util.Date;
 
 @Component
@@ -15,15 +17,16 @@ public class JwtUtil {
     private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     private final long jwtExpirationInMs = 3600000; // 1 hour
 
-    public String generateToken(String email, String role) {
-        Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
+    @Value("${jwt.secret}")
+    private String base64Secret;
 
+    public String generateToken(String email, String role, Integer id) {
+        byte[] keyBytes = Base64.getDecoder().decode(base64Secret);
+        Key key = Keys.hmacShaKeyFor(keyBytes);
         return Jwts.builder()
                 .setSubject(email)
                 .claim("role", role)
-                .setIssuedAt(now)
-                .setExpiration(expiryDate)
+                .claim("id", id)
                 .signWith(key)
                 .compact();
     }
