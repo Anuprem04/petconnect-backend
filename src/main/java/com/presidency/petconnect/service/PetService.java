@@ -7,9 +7,13 @@ import java.util.List;
 
 public interface PetService {
 
-    PetDto createPet(PetDto petDto) throws ResourceNotFoundException;
-    PetDto getPetById(int id) throws ResourceNotFoundException;
-    PetDto updatePetById(int id , PetDto petDto) throws ResourceNotFoundException;
-    List<PetDto> getAllPets();
-    String deletePetById(int id) throws ResourceNotFoundException;
+    PetDto createPetForShelter(Integer shelterId, PetDto petDto) throws ResourceNotFoundException;
+
+    List<PetDto> getAllByShelterId(Integer shelterId);
+
+    PetDto getByIdAndShelter(Integer petId, Integer shelterId) throws ResourceNotFoundException;
+
+    PetDto updatePetForShelter(Integer petId, Integer shelterId, PetDto petDto) throws ResourceNotFoundException;
+
+    void deletePetForShelter(Integer petId, Integer shelterId) throws ResourceNotFoundException;
 }

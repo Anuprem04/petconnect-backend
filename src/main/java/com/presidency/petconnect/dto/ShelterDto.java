@@ -1,22 +1,22 @@
-
 package com.presidency.petconnect.dto;
 
 public class ShelterDto {
     private int shelterId;
     private String name;
-    private String address;
+    private String email;
+    private String password;
+    private String city;
     private String phone;
-    private String contactPerson;
-
 
     public ShelterDto() {}
 
-    public ShelterDto(int shelterId, String name, String address, String phone, String contactPerson) {
+    public ShelterDto(int shelterId, String name, String email, String password, String city, String phone) {
         this.shelterId = shelterId;
         this.name = name;
-        this.address = address;
+        this.email = email;
+        this.password = password;
+        this.city = city;
         this.phone = phone;
-        this.contactPerson = contactPerson;
     }
 
     public int getShelterId() {
@@ -35,12 +35,28 @@ public class ShelterDto {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getPhone() {
@@ -49,13 +65,5 @@ public class ShelterDto {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getContactPerson() {
-        return contactPerson;
-    }
-
-    public void setContactPerson(String contactPerson) {
-        this.contactPerson = contactPerson;
     }
 }

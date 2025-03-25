@@ -1,8 +1,10 @@
 
 package com.presidency.petconnect.controller;
 
+import com.presidency.petconnect.dto.LoginRequestDto;
 import com.presidency.petconnect.dto.ShelterDto;
 import com.presidency.petconnect.exception.ResourceNotFoundException;
+import com.presidency.petconnect.service.LoginService;
 import com.presidency.petconnect.service.ShelterService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,7 @@ import java.util.List;
 public class ShelterController {
 
     private final ShelterService shelterService;
+
 
     public ShelterController(ShelterService shelterService) {
         this.shelterService = shelterService;

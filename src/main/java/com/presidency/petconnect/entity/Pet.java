@@ -6,9 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 public class Pet {
@@ -22,7 +24,7 @@ public class Pet {
     @JsonBackReference
     private Shelter shelter;
 
-    private String name;
+    private String animalType;
     private String breed;
     private int age;
     private String gender;
@@ -30,15 +32,15 @@ public class Pet {
     private String photos;
     private String adoptionStatus;
     private Double price;
-    private Timestamp createdAt;
+
 
     public Pet() {
     }
 
-    public Pet(int petId, Shelter shelter, String name, String breed, int age, String gender, String description, String photos, String adoptionStatus, Double price) {
+    public Pet(int petId, Shelter shelter, String animalType, String breed, int age, String gender, String description, String photos, String adoptionStatus, Double price) {
         this.petId = petId;
         this.shelter = shelter;
-        this.name = name;
+        this.animalType = animalType;
         this.breed = breed;
         this.age = age;
         this.gender = gender;
@@ -46,6 +48,7 @@ public class Pet {
         this.photos = photos;
         this.adoptionStatus = adoptionStatus;
         this.price = price;
+
     }
 
     public int getPetId() {
@@ -64,12 +67,12 @@ public class Pet {
         this.shelter = shelter;
     }
 
-    public String getName() {
-        return name;
+    public String getAnimalType() {
+        return animalType;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAnimalType(String animalType) {
+        this.animalType = animalType;
     }
 
     public String getBreed() {
@@ -128,13 +131,5 @@ public class Pet {
         this.price = price;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    @PrePersist
-    protected void onCreate() {
-        createdAt = Timestamp.from(Instant.now());
-    }
 
 }

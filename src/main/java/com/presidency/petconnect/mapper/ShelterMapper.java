@@ -1,4 +1,3 @@
-
 package com.presidency.petconnect.mapper;
 
 import com.presidency.petconnect.dto.ShelterDto;
@@ -10,9 +9,10 @@ public class ShelterMapper {
         return new ShelterDto(
                 shelter.getShelterId(),
                 shelter.getName(),
-                shelter.getAddress(),
-                shelter.getPhone(),
-                shelter.getContactPerson()
+                shelter.getEmail(),
+                shelter.getPassword(),
+                shelter.getCity(),
+                shelter.getPhone()
         );
     }
 
@@ -20,9 +20,10 @@ public class ShelterMapper {
         Shelter shelter = new Shelter();
         shelter.setShelterId(dto.getShelterId());
         shelter.setName(dto.getName());
-        shelter.setAddress(dto.getAddress());
+        shelter.setEmail(dto.getEmail());
+        shelter.setPassword(dto.getPassword());
+        shelter.setCity(dto.getCity());
         shelter.setPhone(dto.getPhone());
-        shelter.setContactPerson(dto.getContactPerson());
         return shelter;
     }
 }
