@@ -68,4 +68,13 @@ public class AdoptionServiceImpl implements AdoptionService {
         adoptionRepository.deleteById(id);
         return "Adoption with id "+id+" deleted successfully";
     }
+    @Override
+    public boolean existsByUserIdAndPetId(int userId, int petId) {
+        return adoptionRepository.existsByUserUserIdAndPetPetId(userId, petId);
+    }
+    public List<AdoptionDto> getAdoptionsByUserId(int userId) {
+        List<Adoption> adoptions = adoptionRepository.findByUserUserId(userId);
+        return adoptions.stream().map(AdoptionMapper::toDto).collect(Collectors.toList());
+    }
+
 }

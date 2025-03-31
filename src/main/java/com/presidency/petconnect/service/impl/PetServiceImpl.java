@@ -1,5 +1,6 @@
 package com.presidency.petconnect.service.impl;
 
+import com.presidency.petconnect.dto.AdoptionDto;
 import com.presidency.petconnect.dto.PetDto;
 import com.presidency.petconnect.entity.Pet;
 import com.presidency.petconnect.entity.Shelter;
@@ -88,4 +89,11 @@ public class PetServiceImpl implements PetService {
     public List<PetDto> getAllPets() {
         return petRepository.findAll().stream().map(PetMapper::mapToPetDto).collect(Collectors.toList());
     }
+
+    @Override
+    public PetDto getPetById(int id) throws ResourceNotFoundException {
+        Pet pet = petRepository.findById(id).orElseThrow( () -> new ResourceNotFoundException("Pet Not Found"));
+        return PetMapper.mapToPetDto(pet);
+    }
+
 }

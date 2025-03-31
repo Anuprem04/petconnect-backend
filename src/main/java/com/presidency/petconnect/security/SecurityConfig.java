@@ -103,6 +103,7 @@ public class SecurityConfig {
                     .authorizeHttpRequests(auth -> auth
                             .requestMatchers(HttpMethod.OPTIONS, "/api/petConnect/**").permitAll()
                             .requestMatchers(HttpMethod.POST, "/api/petConnect/shelters").permitAll()
+                            .requestMatchers(HttpMethod.POST, "/api/petConnect/adoptions").permitAll()
                             .requestMatchers(HttpMethod.GET, "/api/petConnect/shelters/**").permitAll()
                             .requestMatchers(HttpMethod.GET, "/images/**").permitAll()
                             .requestMatchers(HttpMethod.POST, "/api/petConnect/login/**").permitAll()

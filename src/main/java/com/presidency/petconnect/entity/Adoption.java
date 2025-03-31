@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDate;
 
 @Entity
 public class Adoption {
@@ -19,18 +20,25 @@ public class Adoption {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private Timestamp applicationDate;
+    private LocalDate applicationDate;
     private String approvalStatus;
+
+    private String name;
+    private String phone;
+    private String reason;
 
     public Adoption() {
     }
 
-    public Adoption(int adoptionId, Pet pet, User user, Timestamp applicationDate, String approvalStatus) {
+    public Adoption(int adoptionId, Pet pet, User user, LocalDate applicationDate, String approvalStatus, String name, String phone, String reason) {
         this.adoptionId = adoptionId;
         this.pet = pet;
         this.user = user;
         this.applicationDate = applicationDate;
         this.approvalStatus = approvalStatus;
+        this.name = name;
+        this.phone = phone;
+        this.reason = reason;
     }
 
     public int getAdoptionId() {
@@ -57,11 +65,11 @@ public class Adoption {
         this.user = user;
     }
 
-    public Timestamp getApplicationDate() {
+    public LocalDate getApplicationDate() {
         return applicationDate;
     }
 
-    public void setApplicationDate(Timestamp applicationDate) {
+    public void setApplicationDate(LocalDate applicationDate) {
         this.applicationDate = applicationDate;
     }
 
@@ -73,4 +81,27 @@ public class Adoption {
         this.approvalStatus = approvalStatus;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
 }

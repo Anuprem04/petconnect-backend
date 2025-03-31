@@ -12,4 +12,7 @@ public interface AdoptionService {
     List<AdoptionDto> getAllAdoptions();
     AdoptionDto updateAdoption(int id, AdoptionDto adoptionDto) throws ResourceNotFoundException;
     String deleteAdoption(int id) throws ResourceNotFoundException;
+    boolean existsByUserIdAndPetId(int userId, int petId);
+
+    List<AdoptionDto> getAdoptionsByUserId(int userId);
 }

@@ -1,5 +1,6 @@
 package com.presidency.petconnect.service;
 
+import com.presidency.petconnect.dto.AdoptionDto;
 import com.presidency.petconnect.dto.PetDto;
 import com.presidency.petconnect.entity.Pet;
 import com.presidency.petconnect.exception.ResourceNotFoundException;
@@ -19,4 +20,7 @@ public interface PetService {
     void deletePetForShelter(Integer petId, Integer shelterId) throws ResourceNotFoundException;
 
     List<PetDto> getAllPets();
+
+    PetDto getPetById(int id) throws ResourceNotFoundException;
+
 }

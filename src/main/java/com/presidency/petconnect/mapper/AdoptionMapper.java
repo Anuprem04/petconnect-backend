@@ -12,7 +12,10 @@ public class AdoptionMapper {
                 adoption.getPet().getPetId(),
                 adoption.getUser().getUserId(),
                 adoption.getApplicationDate(),
-                adoption.getApprovalStatus()
+                adoption.getApprovalStatus(),
+                adoption.getName(),
+                adoption.getPhone(),
+                adoption.getReason()
         );
     }
 
@@ -22,7 +25,10 @@ public class AdoptionMapper {
                 pet,
                 user,
                 adoptionDto.getApplicationDate(),
-                adoptionDto.getApprovalStatus()
+                adoptionDto.getApprovalStatus(),
+                adoptionDto.getName(),
+                adoptionDto.getPhone(),
+                adoptionDto.getReason()
         );
     }
 }
