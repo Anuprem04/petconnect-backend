@@ -60,11 +60,11 @@ public class AdoptionController {
     public ResponseEntity<List<AdoptionDto>> getAll() {
         return ResponseEntity.ok(service.getAllAdoptions());
     }
-    @GetMapping("/user")
+    @GetMapping("/user/{id}")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<List<AdoptionDto>> getAdoptionsByUser(@AuthenticationPrincipal Jwt jwt) {
-        int userId = jwt.getClaim("id");
-        List<AdoptionDto> adoptions = service.getAdoptionsByUserId(userId);
+    public ResponseEntity<List<AdoptionDto>> getAdoptionsByUser(@AuthenticationPrincipal Jwt jwt, @PathVariable String id) {
+        Long userId = jwt.getClaim("id");
+        List<AdoptionDto> adoptions = service.getAdoptionsByUserId(userId.intValue());
         return ResponseEntity.ok(adoptions);
     }
 
