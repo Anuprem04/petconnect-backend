@@ -52,8 +52,8 @@ public class PetController {
     @GetMapping
     @PreAuthorize("hasRole('SHELTER')")
     public ResponseEntity<List<PetDto>> getAll(@AuthenticationPrincipal Jwt jwt) {
-        Integer shelterId = jwt.getClaim("id");
-        return ResponseEntity.ok(petService.getAllByShelterId(shelterId));
+        Long shelterId = jwt.getClaim("id");
+        return ResponseEntity.ok(petService.getAllByShelterId(shelterId.intValue()));
     }
     @GetMapping("/all")
 
@@ -67,8 +67,8 @@ public class PetController {
             @AuthenticationPrincipal Jwt jwt,
             @PathVariable int id
     ) throws ResourceNotFoundException {
-        Integer shelterId = jwt.getClaim("id");
-        return ResponseEntity.ok(petService.getByIdAndShelter(id, shelterId));
+        Long shelterId = jwt.getClaim("id");
+        return ResponseEntity.ok(petService.getByIdAndShelter(id, shelterId.intValue()));
     }
     @GetMapping("/public/{id}")
     public ResponseEntity<PetDto> getPetByIdForPublic(@PathVariable int id) throws ResourceNotFoundException {
