@@ -4,6 +4,7 @@ import com.presidency.petconnect.dto.AdoptionDto;
 import com.presidency.petconnect.dto.PetDto;
 import com.presidency.petconnect.entity.Pet;
 import com.presidency.petconnect.entity.Shelter;
+import com.presidency.petconnect.exception.PetRequestedForAdoption;
 import com.presidency.petconnect.exception.ResourceNotFoundException;
 import com.presidency.petconnect.mapper.PetMapper;
 import com.presidency.petconnect.repository.PetRepository;
@@ -12,6 +13,7 @@ import com.presidency.petconnect.service.PetService;
 import com.presidency.petconnect.service.StorageService;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -78,11 +80,20 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public void deletePetForShelter(Integer id, Integer shelterId) throws ResourceNotFoundException {
+    public void deletePetForShelter(Integer id, Integer shelterId) throws ResourceNotFoundException, PetRequestedForAdoption {
         if (!petRepository.existsByPetIdAndShelter_ShelterId(id, shelterId)) {
             throw new ResourceNotFoundException("Pet not found");
         }
-        petRepository.deleteById(id);
+        else {
+            try {
+                petRepository.deleteById(id);
+            } catch (Exception e) {
+                if (e.getMessage().contains("foreign key constraint fails")) {
+                    throw new PetRequestedForAdoption("The Pet " + id + " is already under an adoption request");
+                }
+            }
+        }
+
     }
 
     @Override

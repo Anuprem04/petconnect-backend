@@ -67,7 +67,13 @@ public class AdoptionController {
         List<AdoptionDto> adoptions = service.getAdoptionsByUserId(userId.intValue());
         return ResponseEntity.ok(adoptions);
     }
-
+    @GetMapping("/shelter/{id}")
+    @PreAuthorize("hasRole('SHELTER')")
+    public ResponseEntity<List<AdoptionDto>> getAdoptionsByShelter(@AuthenticationPrincipal Jwt jwt, @PathVariable String id) {
+        Long userId = jwt.getClaim("id");
+        List<AdoptionDto> adoptions = service.getAdoptionsByShelterId(userId.intValue());
+        return ResponseEntity.ok(adoptions);
+    }
     @PutMapping("/{id}")
     public ResponseEntity<AdoptionDto> update(@PathVariable int id, @RequestBody AdoptionDto dto) throws ResourceNotFoundException {
         return ResponseEntity.ok(service.updateAdoption(id, dto));

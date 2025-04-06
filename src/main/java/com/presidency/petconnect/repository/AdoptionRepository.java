@@ -9,4 +9,6 @@ public interface AdoptionRepository extends JpaRepository<Adoption,Integer> {
     boolean existsByUserUserIdAndPetPetId(int userId, int petId);
 
     List<Adoption> findByUserUserId(int userId);
+
+    List<Adoption> findByShelterShelterId(int shelterId);
 }

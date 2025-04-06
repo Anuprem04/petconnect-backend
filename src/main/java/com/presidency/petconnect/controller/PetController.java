@@ -2,6 +2,7 @@ package com.presidency.petconnect.controller;
 
 import com.presidency.petconnect.dto.PetDto;
 import com.presidency.petconnect.dto.PetRequestDto;
+import com.presidency.petconnect.exception.PetRequestedForAdoption;
 import com.presidency.petconnect.exception.ResourceNotFoundException;
 import com.presidency.petconnect.service.PetService;
 import org.springframework.http.*;
@@ -82,8 +83,8 @@ public class PetController {
             @PathVariable int id,
             @RequestBody PetDto dto
     ) throws ResourceNotFoundException {
-        Integer shelterId = jwt.getClaim("id");
-        return ResponseEntity.ok(petService.updatePetForShelter(id, shelterId, dto));
+        Long shelterId = jwt.getClaim("id");
+        return ResponseEntity.ok(petService.updatePetForShelter(id, shelterId.intValue(), dto));
     }
 
     @DeleteMapping("{id}")
@@ -91,9 +92,9 @@ public class PetController {
     public ResponseEntity<Void> delete(
             @AuthenticationPrincipal Jwt jwt,
             @PathVariable int id
-    ) throws ResourceNotFoundException {
-        Integer shelterId = jwt.getClaim("id");
-        petService.deletePetForShelter(id, shelterId);
+    ) throws ResourceNotFoundException, PetRequestedForAdoption {
+        Long shelterId = jwt.getClaim("id");
+        petService.deletePetForShelter(id, shelterId.intValue());
         return ResponseEntity.noContent().build();
     }
 }

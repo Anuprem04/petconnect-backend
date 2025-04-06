@@ -4,11 +4,13 @@ package com.presidency.petconnect.service.impl;
 import com.presidency.petconnect.dto.AdoptionDto;
 import com.presidency.petconnect.entity.Adoption;
 import com.presidency.petconnect.entity.Pet;
+import com.presidency.petconnect.entity.Shelter;
 import com.presidency.petconnect.entity.User;
 import com.presidency.petconnect.exception.ResourceNotFoundException;
 import com.presidency.petconnect.mapper.AdoptionMapper;
 import com.presidency.petconnect.repository.AdoptionRepository;
 import com.presidency.petconnect.repository.PetRepository;
+import com.presidency.petconnect.repository.ShelterRepository;
 import com.presidency.petconnect.repository.UserRepository;
 import com.presidency.petconnect.service.AdoptionService;
 import org.springframework.stereotype.Service;
@@ -21,11 +23,13 @@ public class AdoptionServiceImpl implements AdoptionService {
     private final AdoptionRepository adoptionRepository;
     private final PetRepository petRepository;
     private final UserRepository userRepository;
+    private final ShelterRepository shelterRepository;
 
-    public AdoptionServiceImpl(AdoptionRepository adoptionRepository, PetRepository petRepository, UserRepository userRepository) {
+    public AdoptionServiceImpl(AdoptionRepository adoptionRepository, PetRepository petRepository, UserRepository userRepository,ShelterRepository shelterRepository) {
         this.adoptionRepository = adoptionRepository;
         this.petRepository = petRepository;
         this.userRepository = userRepository;
+        this.shelterRepository = shelterRepository;
     }
 
     @Override
@@ -34,7 +38,9 @@ public class AdoptionServiceImpl implements AdoptionService {
                 .orElseThrow(() -> new ResourceNotFoundException("Pet not found"));
         User user = userRepository.findById(adoptionDto.getUserId())
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-        Adoption adoption = AdoptionMapper.toEntity(adoptionDto, pet, user);
+        Shelter shelter = shelterRepository.findById(pet.getShelter().getShelterId())
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        Adoption adoption = AdoptionMapper.toEntity(adoptionDto, pet, user,shelter);
         Adoption saved = adoptionRepository.save(adoption);
         return AdoptionMapper.toDto(saved);
     }
@@ -74,6 +80,12 @@ public class AdoptionServiceImpl implements AdoptionService {
     }
     public List<AdoptionDto> getAdoptionsByUserId(int userId) {
         List<Adoption> adoptions = adoptionRepository.findByUserUserId(userId);
+        return adoptions.stream().map(AdoptionMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AdoptionDto> getAdoptionsByShelterId(int shelterId) {
+        List<Adoption> adoptions = adoptionRepository.findByShelterShelterId(shelterId);
         return adoptions.stream().map(AdoptionMapper::toDto).collect(Collectors.toList());
     }
 

@@ -9,18 +9,21 @@ public class AdoptionDto {
     private int adoptionId;
     private int petId;
     private int userId;
+    private int shelterId;
     private LocalDate applicationDate;
     private String approvalStatus;
     private String name;
     private String phone;
     private String reason;
+
     public AdoptionDto() {
     }
 
-    public AdoptionDto(int adoptionId, int petId, int userId, LocalDate applicationDate, String approvalStatus, String name, String phone, String reason) {
+    public AdoptionDto(int adoptionId, int petId, int userId, int shelterId, LocalDate applicationDate, String approvalStatus, String name, String phone, String reason) {
         this.adoptionId = adoptionId;
         this.petId = petId;
         this.userId = userId;
+        this.shelterId = shelterId;
         this.applicationDate = applicationDate;
         this.approvalStatus = approvalStatus;
         this.name = name;
@@ -50,6 +53,14 @@ public class AdoptionDto {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public int getShelterId() {
+        return shelterId;
+    }
+
+    public void setShelterId(int shelterId) {
+        this.shelterId = shelterId;
     }
 
     public LocalDate getApplicationDate() {

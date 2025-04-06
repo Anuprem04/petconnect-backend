@@ -15,4 +15,6 @@ public interface AdoptionService {
     boolean existsByUserIdAndPetId(int userId, int petId);
 
     List<AdoptionDto> getAdoptionsByUserId(int userId);
+
+    List<AdoptionDto> getAdoptionsByShelterId(int intValue);
 }

@@ -20,6 +20,9 @@ public class Adoption {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "shelter_id")
+    private Shelter shelter;
     private LocalDate applicationDate;
     private String approvalStatus;
 
@@ -30,10 +33,11 @@ public class Adoption {
     public Adoption() {
     }
 
-    public Adoption(int adoptionId, Pet pet, User user, LocalDate applicationDate, String approvalStatus, String name, String phone, String reason) {
+    public Adoption(int adoptionId, Pet pet, User user, Shelter shelter, LocalDate applicationDate, String approvalStatus, String name, String phone, String reason) {
         this.adoptionId = adoptionId;
         this.pet = pet;
         this.user = user;
+        this.shelter = shelter;
         this.applicationDate = applicationDate;
         this.approvalStatus = approvalStatus;
         this.name = name;
@@ -63,6 +67,14 @@ public class Adoption {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Shelter getShelter() {
+        return shelter;
+    }
+
+    public void setShelter(Shelter shelter) {
+        this.shelter = shelter;
     }
 
     public LocalDate getApplicationDate() {
