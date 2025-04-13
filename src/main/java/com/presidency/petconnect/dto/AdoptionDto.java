@@ -1,9 +1,6 @@
-
 package com.presidency.petconnect.dto;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.Locale;
 
 public class AdoptionDto {
     private int adoptionId;
@@ -15,11 +12,14 @@ public class AdoptionDto {
     private String name;
     private String phone;
     private String reason;
+    private AddressDto address;
 
+    private boolean isDeliveryRequested;
+    private boolean isPaymentSuccessful;
     public AdoptionDto() {
     }
 
-    public AdoptionDto(int adoptionId, int petId, int userId, int shelterId, LocalDate applicationDate, String approvalStatus, String name, String phone, String reason) {
+    public AdoptionDto(int adoptionId, int petId, int userId, int shelterId, LocalDate applicationDate, String approvalStatus, String name, String phone, String reason, AddressDto address, boolean isDeliveryRequested, boolean isPaymentSuccessful) {
         this.adoptionId = adoptionId;
         this.petId = petId;
         this.userId = userId;
@@ -29,6 +29,9 @@ public class AdoptionDto {
         this.name = name;
         this.phone = phone;
         this.reason = reason;
+        this.address = address;
+        this.isDeliveryRequested = isDeliveryRequested;
+        this.isPaymentSuccessful = isPaymentSuccessful;
     }
 
     public int getAdoptionId() {
@@ -101,5 +104,47 @@ public class AdoptionDto {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public AddressDto getAddress() {
+        return address;
+    }
+
+    public void setAddress(AddressDto address) {
+        this.address = address;
+    }
+
+    public boolean isDeliveryRequested() {
+        return isDeliveryRequested;
+    }
+
+    public void setDeliveryRequested(boolean deliveryRequested) {
+        isDeliveryRequested = deliveryRequested;
+    }
+
+    public boolean isPaymentSuccessful() {
+        return isPaymentSuccessful;
+    }
+
+    public void setPaymentSuccessful(boolean paymentSuccessful) {
+        isPaymentSuccessful = paymentSuccessful;
+    }
+
+    @Override
+    public String toString() {
+        return "AdoptionDto{" +
+                "adoptionId=" + adoptionId +
+                ", petId=" + petId +
+                ", userId=" + userId +
+                ", shelterId=" + shelterId +
+                ", applicationDate=" + applicationDate +
+                ", approvalStatus='" + approvalStatus + '\'' +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", reason='" + reason + '\'' +
+                ", address=" + address +
+                ", isDeliveryRequested=" + isDeliveryRequested +
+                ", isPaymentSuccessful=" + isPaymentSuccessful +
+                '}';
     }
 }

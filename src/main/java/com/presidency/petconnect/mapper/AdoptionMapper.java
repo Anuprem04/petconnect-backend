@@ -1,6 +1,8 @@
 package com.presidency.petconnect.mapper;
 
+import com.presidency.petconnect.dto.AddressDto;
 import com.presidency.petconnect.dto.AdoptionDto;
+import com.presidency.petconnect.entity.Address;
 import com.presidency.petconnect.entity.Adoption;
 import com.presidency.petconnect.entity.Pet;
 import com.presidency.petconnect.entity.Shelter;
@@ -17,7 +19,10 @@ public class AdoptionMapper {
                 adoption.getApprovalStatus(),
                 adoption.getName(),
                 adoption.getPhone(),
-                adoption.getReason()
+                adoption.getReason(),
+                toAddressDto(adoption.getAddress()),
+                adoption.isDeliveryRequested(),
+                adoption.isPaymentSuccessful()
         );
     }
 
@@ -31,7 +36,34 @@ public class AdoptionMapper {
                 adoptionDto.getApprovalStatus(),
                 adoptionDto.getName(),
                 adoptionDto.getPhone(),
-                adoptionDto.getReason()
+                adoptionDto.getReason(),
+                toAddress(adoptionDto.getAddress()),
+                adoptionDto.isDeliveryRequested(),
+                adoptionDto.isPaymentSuccessful()
+        );
+    }
+
+    private static AddressDto toAddressDto(Address address) {
+        if (address == null) {
+            return null;
+        }
+        return new AddressDto(
+                address.getStreetAddress(),
+                address.getCity(),
+                address.getState(),
+                address.getZipCode()
+        );
+    }
+
+    private static Address toAddress(AddressDto addressDto) {
+        if (addressDto == null) {
+            return null;
+        }
+        return new Address(
+                addressDto.getStreetAddress(),
+                addressDto.getCity(),
+                addressDto.getState(),
+                addressDto.getZipCode()
         );
     }
 }

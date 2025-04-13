@@ -58,10 +58,19 @@ public class AdoptionServiceImpl implements AdoptionService {
     }
 
     @Override
-    public AdoptionDto updateAdoption(int id, AdoptionDto adoptionDto) throws ResourceNotFoundException {
+    public AdoptionDto updateApprovalStatus(int id, AdoptionDto adoptionDto) throws ResourceNotFoundException {
         Adoption adoption = adoptionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Adoption not found"));
         adoption.setApprovalStatus(adoptionDto.getApprovalStatus());
+        Adoption updated = adoptionRepository.save(adoption);
+        return AdoptionMapper.toDto(updated);
+    }
+
+    @Override
+    public AdoptionDto updatePaymentStatus(int id, AdoptionDto adoptionDto) throws ResourceNotFoundException {
+        Adoption adoption = adoptionRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Adoption not found"));
+        adoption.setPaymentSuccessful(adoptionDto.isPaymentSuccessful());
         Adoption updated = adoptionRepository.save(adoption);
         return AdoptionMapper.toDto(updated);
     }

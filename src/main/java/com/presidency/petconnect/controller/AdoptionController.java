@@ -76,7 +76,13 @@ public class AdoptionController {
     }
     @PutMapping("/{id}")
     public ResponseEntity<AdoptionDto> update(@PathVariable int id, @RequestBody AdoptionDto dto) throws ResourceNotFoundException {
-        return ResponseEntity.ok(service.updateAdoption(id, dto));
+        System.out.println(dto.toString());
+        return ResponseEntity.ok(service.updateApprovalStatus(id, dto));
+    }
+    @PutMapping("payment/{id}")
+    public ResponseEntity<AdoptionDto> updatePaymentStatus(@PathVariable int id, @RequestBody AdoptionDto dto) throws ResourceNotFoundException {
+        System.out.println(dto.toString());
+        return ResponseEntity.ok(service.updatePaymentStatus(id, dto));
     }
 
     @DeleteMapping("/{id}")

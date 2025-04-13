@@ -1,9 +1,6 @@
 package com.presidency.petconnect.entity;
 
 import jakarta.persistence.*;
-
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.time.LocalDate;
 
 @Entity
@@ -12,6 +9,7 @@ public class Adoption {
     @SequenceGenerator(name = "adoption_seq", sequenceName = "adoption_sequence", initialValue = 4000, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "adoption_seq")
     private int adoptionId;
+
     @ManyToOne
     @JoinColumn(name = "pet_id")
     private Pet pet;
@@ -23,17 +21,22 @@ public class Adoption {
     @ManyToOne
     @JoinColumn(name = "shelter_id")
     private Shelter shelter;
+
     private LocalDate applicationDate;
     private String approvalStatus;
-
     private String name;
     private String phone;
     private String reason;
 
+    @Embedded
+    private Address address;
+
+    private boolean isDeliveryRequested;
+    private boolean isPaymentSuccessful;
     public Adoption() {
     }
 
-    public Adoption(int adoptionId, Pet pet, User user, Shelter shelter, LocalDate applicationDate, String approvalStatus, String name, String phone, String reason) {
+    public Adoption(int adoptionId, Pet pet, User user, Shelter shelter, LocalDate applicationDate, String approvalStatus, String name, String phone, String reason, Address address, boolean isDeliveryRequested, boolean isPaymentSuccessful) {
         this.adoptionId = adoptionId;
         this.pet = pet;
         this.user = user;
@@ -43,6 +46,9 @@ public class Adoption {
         this.name = name;
         this.phone = phone;
         this.reason = reason;
+        this.address = address;
+        this.isDeliveryRequested = isDeliveryRequested;
+        this.isPaymentSuccessful = isPaymentSuccessful;
     }
 
     public int getAdoptionId() {
@@ -115,5 +121,29 @@ public class Adoption {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public boolean isDeliveryRequested() {
+        return isDeliveryRequested;
+    }
+
+    public void setDeliveryRequested(boolean deliveryRequested) {
+        isDeliveryRequested = deliveryRequested;
+    }
+
+    public boolean isPaymentSuccessful() {
+        return isPaymentSuccessful;
+    }
+
+    public void setPaymentSuccessful(boolean paymentSuccessful) {
+        isPaymentSuccessful = paymentSuccessful;
     }
 }

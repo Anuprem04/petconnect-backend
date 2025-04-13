@@ -10,7 +10,8 @@ public interface AdoptionService {
     AdoptionDto createAdoption(AdoptionDto adoptionDto) throws ResourceNotFoundException;
     AdoptionDto getAdoptionById(int id) throws ResourceNotFoundException;
     List<AdoptionDto> getAllAdoptions();
-    AdoptionDto updateAdoption(int id, AdoptionDto adoptionDto) throws ResourceNotFoundException;
+    AdoptionDto updateApprovalStatus(int id, AdoptionDto adoptionDto) throws ResourceNotFoundException;
+    AdoptionDto updatePaymentStatus(int id, AdoptionDto adoptionDto) throws ResourceNotFoundException;
     String deleteAdoption(int id) throws ResourceNotFoundException;
     boolean existsByUserIdAndPetId(int userId, int petId);
 

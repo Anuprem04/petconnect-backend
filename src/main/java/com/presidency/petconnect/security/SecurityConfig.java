@@ -37,6 +37,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/petConnect/queries").hasRole("SHELTER")
                         .requestMatchers(HttpMethod.GET, "/api/petConnect/shelters").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/petConnect/adoptions").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/petConnect/adoptions/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/petConnect/adoptions/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/petConnect/shelters/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/images/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/petConnect/login/**").permitAll()
